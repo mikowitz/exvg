@@ -3,7 +3,7 @@ defmodule ExVG.Elements.SvgTest do
 
   alias ExVG.Elements.Svg
 
-  describe "ToSvg" do
+  describe "to_svg" do
     test "when it is not the root element" do
       svg = %Svg{width: 100, height: 200}
 
