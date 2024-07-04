@@ -5,7 +5,7 @@ defmodule ExVG.Elements.Svg do
 
   @derive {Inspect, only: [:height, :width, :x, :y, :viewBox]}
   @enforce_keys [:height, :width]
-  defstruct [:height, :width, x: 0, y: 0, viewBox: "0 0 100 100", is_root: false]
+  defstruct [:height, :width, x: 0, y: 0, viewBox: "0 0 100 100", is_root: false, children: []]
 
   defimpl ExVG.ToSvg do
     @attrs ~w(height width x y viewBox)a
@@ -20,10 +20,20 @@ defmodule ExVG.Elements.Svg do
 
       [
         "<svg #{attributes}>",
+        svg.children
+        |> Enum.map(&ExVG.to_svg/1)
+        |> Enum.map(&indent/1),
         "</svg>"
       ]
+      |> List.flatten()
       |> Enum.reject(&is_nil/1)
       |> Enum.join("\n")
+    end
+
+    defp indent(s) when is_bitstring(s) do
+      s
+      |> String.split("\n", trim: true)
+      |> Enum.map_join("\n", &"  #{&1}")
     end
   end
 end
