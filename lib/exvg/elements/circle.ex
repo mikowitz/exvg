@@ -5,15 +5,5 @@ defmodule ExVG.Elements.Circle do
 
   defstruct [:r, :cx, :cy]
 
-  defimpl ExVG.ToSvg do
-    @attrs ~w(r cx cy)a
-    def to_svg(%@for{} = circle) do
-      attributes =
-        @attrs
-        |> Enum.map(fn a -> {a, Map.get(circle, a)} end)
-        |> Enum.map_join(" ", fn {k, v} -> "#{k}=\"#{v}\"" end)
-
-      "<circle #{attributes} />"
-    end
-  end
+  use ExVG.Element, attrs: [:r, :cx, :cy]
 end

@@ -5,13 +5,5 @@ defmodule ExVG.Elements.Polyline do
 
   defstruct [:points]
 
-  defimpl ExVG.ToSvg do
-    def to_svg(%@for{points: points}) do
-      points =
-        points
-        |> Enum.map_join(" ", fn {k, v} -> "#{k},#{v}" end)
-
-      "<polyline points=\"#{points}\" />"
-    end
-  end
+  use ExVG.Element, attrs: [:points]
 end
