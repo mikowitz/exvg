@@ -1,16 +1,16 @@
 defmodule ExVG.Elements.Circle do
   @moduledoc """
-  Models a '<circle/>' document element
+  Models a '<circle>' document element
   """
 
   defstruct [:r, :cx, :cy]
 
   defimpl ExVG.ToSvg do
     @attrs ~w(r cx cy)a
-    def to_svg(%@for{} = rect) do
+    def to_svg(%@for{} = circle) do
       attributes =
         @attrs
-        |> Enum.map(fn a -> {a, Map.get(rect, a)} end)
+        |> Enum.map(fn a -> {a, Map.get(circle, a)} end)
         |> Enum.map_join(" ", fn {k, v} -> "#{k}=\"#{v}\"" end)
 
       "<circle #{attributes} />"
