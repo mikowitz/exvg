@@ -3,7 +3,7 @@ defmodule ExVG.Elements.Circle do
   Models a '<circle>' document element
   """
 
-  defstruct [:r, :cx, :cy]
+  defstruct [:r, :cx, :cy, :style]
 
   use ExVG.Element, attrs: [:r, :cx, :cy]
 end
