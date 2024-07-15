@@ -3,7 +3,5 @@ defmodule ExVG.Elements.Polyline do
   Models a `<polyline>` document element
   """
 
-  defstruct [:points, :style]
-
   use ExVG.Element, attrs: [:points]
 end
